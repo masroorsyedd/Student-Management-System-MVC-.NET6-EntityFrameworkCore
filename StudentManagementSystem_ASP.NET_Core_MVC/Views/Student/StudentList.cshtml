@@ -1,0 +1,68 @@
+﻿@model IEnumerable<StudentManagementSystem_ASP.NET_Core_MVC.Models.Student>
+
+@{
+    ViewData["Title"] = "StudentList";
+}
+
+<h1>Student List</h1>
+
+<p class="float-right">
+    <a asp-action="Create" class="btn btn-outline-primary">Add New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+             <th>Actions</th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mobile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th> 
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr> 
+             <td>
+                 <!--using same 'CREATE' method & View to update the records thats why I Write Create here-->
+                @Html.ActionLink("Edit", "Create", new { id=item.ID, item.Name, item.FName, item.Email, item.Mobile, item.Department, item.DepID, item.Description }, new { @class = "btn btn-success"}) |
+                <!--using same 'CREATE' View to Delete the records but made a new method named as 'DeleteStudent'-->
+                @Html.ActionLink("Delete", "DeleteStudent", new { id=item.ID }, new { @class = "btn btn-danger" , onclick = "return confirm('Do you really want to delete the record?')"})
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>
